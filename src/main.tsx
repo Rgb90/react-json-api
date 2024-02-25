@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
-import { Root, ErrorPage, HomePage } from './routes';
+import { Root, ErrorPage, HomePage, UserPage, usersPostLoader } from './routes';
 
 const router = createBrowserRouter([
   {
@@ -10,11 +10,19 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />, //alt sayfalara error elementi koysaydık bütün sayfada hata vermez navbar kalırdı
     children: [
       {
-          index: true,
-          element: <HomePage />,
-        },
-        
-      ]
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "/users",
+        element: <HomePage />,
+      },
+      {
+        path: "/users/:userId",
+        loader: usersPostLoader as any,
+        element: <UserPage />,
+      }
+    ]
   },
 ]);
 
